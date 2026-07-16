@@ -1,0 +1,10 @@
+{
+  "name": "pantheon-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pantheon Studio — sitio web (Cinematic Editorial)",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node server.js"
+  }
+}

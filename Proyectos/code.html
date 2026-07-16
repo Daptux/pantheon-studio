@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#544524",
+                    "on-primary-container": "#463819",
+                    "on-tertiary-fixed-variant": "#484742",
+                    "primary": "#dac49a",
+                    "error-container": "#93000a",
+                    "surface-tint": "#dac49a",
+                    "surface-container-highest": "#353534",
+                    "on-tertiary-container": "#3b3a35",
+                    "secondary-container": "#474742",
+                    "on-primary": "#3c2f10",
+                    "outline": "#989083",
+                    "tertiary-fixed-dim": "#c9c6bf",
+                    "on-primary-fixed": "#251a01",
+                    "inverse-surface": "#e5e2e1",
+                    "on-secondary-fixed": "#1c1c18",
+                    "secondary-fixed": "#e5e2db",
+                    "tertiary": "#c9c6bf",
+                    "primary-container": "#b6a27a",
+                    "secondary": "#c9c6c0",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#131313",
+                    "surface-container-high": "#2a2a2a",
+                    "on-error": "#690005",
+                    "surface-container-low": "#1c1b1b",
+                    "on-surface": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#474742",
+                    "tertiary-fixed": "#e5e2db",
+                    "surface-variant": "#353534",
+                    "on-tertiary": "#31312c",
+                    "background": "#131313",
+                    "on-surface-variant": "#cec5b8",
+                    "on-tertiary-fixed": "#1c1c18",
+                    "on-background": "#e5e2e1",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#31312c",
+                    "outline-variant": "#4c463c",
+                    "tertiary-container": "#a6a49e",
+                    "primary-fixed": "#f7e0b4",
+                    "inverse-primary": "#6d5c3a",
+                    "secondary-fixed-dim": "#c9c6c0",
+                    "surface-container": "#201f1f",
+                    "surface-bright": "#3a3939",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-on-surface": "#313030",
+                    "on-secondary-container": "#b7b5af",
+                    "surface": "#131313",
+                    "primary-fixed-dim": "#dac49a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "gutter": "32px",
+                    "base": "8px",
+                    "section-gap": "128px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Bodoni Moda"],
+                    "body-md": ["Inter"],
+                    "display-md": ["Bodoni Moda"],
+                    "headline-lg-mobile": ["Bodoni Moda"],
+                    "body-lg": ["Inter"],
+                    "label-xs": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Bodoni Moda"],
+                    "headline-lg": ["Bodoni Moda"]
+            },
+            "fontSize": {
+                    "display-lg": ["80px", { "lineHeight": "90px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                    "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                    "display-md": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+                    "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                    "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                    "label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                    "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                    "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "400" }],
+                    "headline-lg": ["40px", { "lineHeight": "48px", "fontWeight": "400" }]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            -webkit-font-smoothing: antialiased;
+        }
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #dac49a;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        .project-card img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        .filter-active {
+            border-bottom: 1px solid #dac49a;
+            color: #dac49a;
+        }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-on-primary">
+<div class="custom-cursor hidden md:block" id="cursor"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-xl dark:bg-background/80 border-b border-outline-variant/20">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base max-w-container-max mx-auto h-20">
+<a class="font-display-md text-display-md uppercase tracking-tighter text-on-surface dark:text-on-background" href="#">
+                Pantheon
+            </a>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-label-sm text-label-sm text-primary dark:text-primary-fixed border-b border-primary pb-1 transition-all" href="#">Proyectos</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Servicios</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Estudio</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Nosotros</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Contacto</a>
+</div>
+<button class="border border-on-surface/20 px-6 py-2 uppercase font-label-sm text-label-sm hover:bg-on-surface hover:text-background transition-all duration-300 active:scale-95">
+                Cotizar proyecto
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-section-gap">
+<!-- Editorial Header -->
+<header class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-16">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-end">
+<div class="md:col-span-8">
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-primary mb-4 block">Portfolio</span>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg max-w-4xl">
+                        Nuestro portafolio: Proyectos con concepto y propósito.
+                    </h1>
+</div>
+<div class="md:col-span-4 md:text-right">
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm ml-auto">
+                        Una selección curada de trabajos que fusionan la estética cinematográfica con la estrategia comercial.
+                    </p>
+</div>
+</div>
+</header>
+<!-- Filter Controls -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24">
+<div class="flex flex-wrap gap-x-8 gap-y-4 border-b border-outline-variant/30 pb-4">
+<button class="font-label-sm text-label-sm uppercase tracking-widest filter-active hover:text-primary transition-colors">Todos</button>
+<button class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Video</button>
+<button class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Fotografía</button>
+<button class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Campañas</button>
+<button class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Contenido social</button>
+<button class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Corporativo</button>
+</div>
+</section>
+<!-- Projects Grid (Asymmetric Editorial Style) -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-y-section-gap gap-x-gutter">
+<!-- Project 1: Featured Wide -->
+<article class="md:col-span-12 group">
+<div class="relative overflow-hidden aspect-[21/9] mb-8 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A wide-angle cinematic shot of a luxury fashion campaign set in a brutalist concrete building at sunset. The lighting is low and warm, casting long shadows. A high-fashion model wears structured monochrome clothing, standing perfectly still. The aesthetic is extremely minimalist and high-end, mirroring a premium production studio output." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWEvVUJmGjzaCbfS5iocOGkIxR8JP9dCTsuxtPuHv81t6u6ZFbaxfnj5ww1BspZ3d3OP2LWt2lu5dh9O0M2xApt3WunlCAsnCtsYLdkcqYrAT8vhk6HB-qwNPCVLDGWo_q0-RoqbqozmZT9RSjWLeDGtNKAS2EFQu8w0dEVDWq_DGbuXhyY-QNfBWdmwnc3OiEnydH1prqQJqDIM7hoWlNvvhvwpCuywauiqrDjWdCwoMLfjMJmQN8"/>
+<div class="absolute inset-0 bg-background/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+<span class="border border-white/50 text-white rounded-full px-8 py-8 uppercase text-label-xs backdrop-blur-md">Ver Proyecto</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start gap-4">
+<div>
+<span class="font-label-xs text-label-xs text-primary uppercase tracking-widest mb-2 block">01 / Campañas</span>
+<h3 class="font-headline-lg text-headline-lg">L'AURA: Essential Forms</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+                            Campaña visual para la colección otoño-invierno, enfocada en el minimalismo arquitectónico y la pureza del material.
+                        </p>
+</div>
+</article>
+<!-- Project 2: Vertical Focus -->
+<article class="md:col-span-5 group">
+<div class="relative overflow-hidden aspect-[4/5] mb-8 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A close-up vertical portrait for a high-end skincare brand. Soft, diffused lighting emphasizes skin texture and a single drop of product. The background is a muted charcoal grey, creating a moody and sophisticated editorial feel. The lighting is precise, highlighting only the essential contours of the subject's face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvnJqMP-3Ah5lCAbOarL84iYPDIMbOp8-x07mU3IwsofksOLyJoHnBeE9QDcIgo99XEXg9ooAnWVMbxcv8J0jHc9tynqacO5A0S8bAsxzVYWk0crex2rfGh2PfU91GaUpMdxTIKegNgp9qeguDHR15IN5AnqpB_h8H-lsNcl9e0kPvUtbo_vJuyAbTy1sadZ68FkUs2PJ4DhWsjpPpqrPyuEm5roKDR6agWF0YrTrKxrBvLFaW8zs2"/>
+</div>
+<span class="font-label-xs text-label-xs text-primary uppercase tracking-widest mb-2 block">02 / Fotografía</span>
+<h3 class="font-headline-md text-headline-md">HELIOS Beauty</h3>
+<div class="w-12 h-px bg-outline-variant/50 my-4"></div>
+<p class="font-body-md text-body-md text-on-surface-variant">Narrativa visual macro enfocada en la sofisticación orgánica.</p>
+</article>
+<!-- Project 3: Horizontal Balance -->
+<article class="md:col-span-7 group mt-0 md:mt-32">
+<div class="relative overflow-hidden aspect-[16/10] mb-8 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A cinematic production still from a commercial video for a luxury automotive brand. A sleek matte black car is parked in a dark, modernist hangar with dramatic rim lighting. The atmosphere is filled with subtle haze, creating depth. The style is ultra-high-fidelity, conveying speed and authority through stillness and lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA815n3P_zKM7oDukY6vYZQ_NuaQNjff9PRSnPq9KK1qAdzanfI0lPGar4S8hjdJr3JyoFpohenJw7rMFyQ8LhNdwX8-BS31dYV1fi6flwqJpwru9RQN0MMiccFTCRt97NiNJ7aYr6O1-KplDxuAqaurJidbSkO2j27aJztmBeAGL1W2CwfXPBN_nRcFX23O7FDtc3ETFTgQtar5EvCDVQLyCbSzgYK39bZJhRSOa5M9dMR9Sxbf23v"/>
+</div>
+<span class="font-label-xs text-label-xs text-primary uppercase tracking-widest mb-2 block">03 / Video</span>
+<h3 class="font-headline-md text-headline-md">NOMAD: Motion Sequence</h3>
+<div class="w-12 h-px bg-outline-variant/50 my-4"></div>
+<p class="font-body-md text-body-md text-on-surface-variant">Producción de contenido dinámico para lanzamiento global de marca automotriz.</p>
+</article>
+<!-- Project 4: Full Grid Width Divider -->
+<div class="md:col-span-12 py-16">
+<div class="h-px bg-outline-variant/20 w-full"></div>
+</div>
+<!-- Project 5 & 6: Standard Grid Pair -->
+<article class="md:col-span-6 group">
+<div class="relative overflow-hidden aspect-square mb-8 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A high-contrast black and white architectural photography shot. Sharp angles of a modern museum facade meet a clear dark sky. The image emphasizes geometry and shadow, reflecting a sophisticated editorial eye. Minimalist and grand, showcasing structural elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO2S3FAc1eORmRoyMtTZDuZfyo9s61Uataz300pGsAiTcBWmZPp3bMi47zoEwKEzzGzwWz_KUbOAKXFTLIaIIfGykgPLnhlqWEXezPg9IKDsAKmW48wS_3BJD2ZYt6uJom8dgfjibBMS4bKxv2Etg5zR2GHT3rNqrOHPpKyWy8JZZTKnHuULTzok_zyovAcg1bsx0JcyWnuVeDBWOcJa56HPtQDTDHacJ1R4OpimvfAalnDerVGRGJ"/>
+</div>
+<span class="font-label-xs text-label-xs text-primary uppercase tracking-widest mb-2 block">04 / Corporativo</span>
+<h3 class="font-headline-md text-headline-md">MUSE: Brand Identity</h3>
+</article>
+<article class="md:col-span-6 group">
+<div class="relative overflow-hidden aspect-square mb-8 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A social media content creation scene. Behind-the-scenes aesthetic of a creative studio space with large windows, expensive camera equipment, and mood boards. The lighting is soft morning light, creating an inviting yet professional work atmosphere. Subtle warm tones and clean organization." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRyUhAddmNbk6CSuGaHxA0nxhwQ05zjHfrHN1fUeX2ufYZ0_TklnCm5PHB4JGZzAVflqB0WDDewf96FX9mcKZtVzyH4HR1nv8HPnLQx-TX9q-lm85ShKI1AGAKlHQAG6rklCFqftNjsTYG6cHEXNVEPDI_xCWYdrn2uzQhF9i8RKAmOWgpo1Y_RbI5GvXwbHl_0RHGC9gFNq6EuVYAY5cMue65awbbiDBMdGQ2TS7WD4wUC1duqgz9"/>
+</div>
+<span class="font-label-xs text-label-xs text-primary uppercase tracking-widest mb-2 block">05 / Contenido Social</span>
+<h3 class="font-headline-md text-headline-md">STUDIO SERIES: Digital Storytelling</h3>
+</article>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-section-gap">
+<div class="bg-surface-container-low p-margin-mobile md:p-32 flex flex-col items-center text-center">
+<h2 class="font-display-md text-headline-lg-mobile md:text-display-md mb-8">¿Tienes una visión en mente?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-12">
+                    Permítenos elevar tu marca con narrativa visual de alto nivel. Estamos listos para el siguiente desafío.
+                </p>
+<button class="bg-primary text-on-primary px-12 py-4 uppercase font-label-sm text-label-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+                    Iniciar conversación
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap bg-surface dark:bg-surface-container-lowest border-t border-outline-variant/30">
+<div class="grid grid-cols-4 md:grid-cols-12 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-4 md:col-span-6">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface dark:text-on-surface mb-8">PANTHEON</h2>
+<p class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant">© 2024 PANTHEON STUDIO. CINEMATIC ELEGANCE.</p>
+</div>
+<div class="col-span-2 md:col-span-2">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface mb-6">Menu</h4>
+<ul class="flex flex-col gap-4">
+<li><a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Proyectos</a></li>
+<li><a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Servicios</a></li>
+<li><a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Estudio</a></li>
+<li><a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Nosotros</a></li>
+<li><a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Contacto</a></li>
+</ul>
+</div>
+<div class="col-span-2 md:col-span-2">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface mb-6">Social</h4>
+<ul class="flex flex-col gap-4">
+<li><a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Instagram</a></li>
+<li><a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">WhatsApp</a></li>
+<li><a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Email</a></li>
+</ul>
+</div>
+<div class="col-span-4 md:col-span-2">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface mb-6">Legal</h4>
+<ul class="flex flex-col gap-4">
+<li><a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Legal</a></li>
+<li><a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Privacy</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button, article').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2)';
+                cursor.style.backgroundColor = 'rgba(218, 196, 154, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Simple scroll parallax for project images
+        window.addEventListener('scroll', () => {
+            const images = document.querySelectorAll('.project-card img');
+            images.forEach(img => {
+                const speed = 0.05;
+                const rect = img.getBoundingClientRect();
+                const visible = rect.top < window.innerHeight && rect.bottom > 0;
+                if (visible) {
+                    const shift = (window.innerHeight - rect.top) * speed;
+                    img.style.transform = `translateY(${shift}px)`;
+                }
+            });
+        });
+    </script>
+</body></html>

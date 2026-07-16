@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pantheon Studio | Cinematic Elegance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#544524",
+                    "on-primary-container": "#463819",
+                    "on-tertiary-fixed-variant": "#484742",
+                    "primary": "#dac49a",
+                    "error-container": "#93000a",
+                    "surface-tint": "#dac49a",
+                    "surface-container-highest": "#353534",
+                    "on-tertiary-container": "#3b3a35",
+                    "secondary-container": "#474742",
+                    "on-primary": "#3c2f10",
+                    "outline": "#989083",
+                    "tertiary-fixed-dim": "#c9c6bf",
+                    "on-primary-fixed": "#251a01",
+                    "inverse-surface": "#e5e2e1",
+                    "on-secondary-fixed": "#1c1c18",
+                    "secondary-fixed": "#e5e2db",
+                    "tertiary": "#c9c6bf",
+                    "primary-container": "#b6a27a",
+                    "secondary": "#c9c6c0",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#131313",
+                    "surface-container-high": "#2a2a2a",
+                    "on-error": "#690005",
+                    "surface-container-low": "#1c1b1b",
+                    "on-surface": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#474742",
+                    "tertiary-fixed": "#e5e2db",
+                    "surface-variant": "#353534",
+                    "on-tertiary": "#31312c",
+                    "background": "#131313",
+                    "on-surface-variant": "#cec5b8",
+                    "on-tertiary-fixed": "#1c1c18",
+                    "on-background": "#e5e2e1",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#31312c",
+                    "outline-variant": "#4c463c",
+                    "tertiary-container": "#a6a49e",
+                    "primary-fixed": "#f7e0b4",
+                    "inverse-primary": "#6d5c3a",
+                    "secondary-fixed-dim": "#c9c6c0",
+                    "surface-container": "#201f1f",
+                    "surface-bright": "#3a3939",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-on-surface": "#313030",
+                    "on-secondary-container": "#b7b5af",
+                    "surface": "#131313",
+                    "primary-fixed-dim": "#dac49a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "gutter": "32px",
+                    "base": "8px",
+                    "section-gap": "128px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Bodoni Moda"],
+                    "body-md": ["Inter"],
+                    "display-md": ["Bodoni Moda"],
+                    "headline-lg-mobile": ["Bodoni Moda"],
+                    "body-lg": ["Inter"],
+                    "label-xs": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Bodoni Moda"],
+                    "headline-lg": ["Bodoni Moda"]
+            },
+            "fontSize": {
+                    "display-lg": ["80px", {"lineHeight": "90px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-md": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-xs": ["10px", {"lineHeight": "14px", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #131313; color: #e5e2e1; }
+        .thin-hairline { border-width: 0.5px; }
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; opacity: 0.05; z-index: 9999;
+            background: url("https://grainy-gradients.vercel.app/noise.svg");
+        }
+        .gallery-hover img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .gallery-hover:hover img { transform: scale(1.05); }
+        .editorial-divider { height: 1px; background: rgba(76, 70, 60, 0.3); }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #dac49a; }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary selection:text-on-primary overflow-x-hidden">
+<div class="noise-overlay"></div>
+<!-- Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-xl dark:bg-background/80 border-b border-outline-variant/20">
+<div class="flex justify-between items-center px-margin-desktop py-base max-w-container-max mx-auto">
+<div class="font-display-md text-display-md uppercase tracking-tighter text-on-surface dark:text-on-background">
+                PANTHEON
+            </div>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="font-label-sm text-label-sm text-primary dark:text-primary-fixed border-b border-primary pb-1" href="#">Proyectos</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Servicios</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Estudio</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Nosotros</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Contacto</a>
+</div>
+<button class="border border-on-surface px-6 py-3 font-label-sm text-label-sm uppercase tracking-widest hover:bg-on-surface hover:text-background transition-all duration-500 active:scale-95">
+                Cotizar proyecto
+            </button>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Cinematic Hero -->
+<section class="relative h-[90vh] flex items-center px-margin-mobile md:px-margin-desktop overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20 z-10"></div>
+<div class="w-full h-full bg-surface-container-low flex items-center justify-center">
+<div class="w-full h-full opacity-60">
+<img class="w-full h-full object-cover" data-alt="A moody, cinematic slow-motion video frame showing a sleek production studio set with high-end cameras and professional lighting equipment. The scene is bathed in deep shadows and warm champagne highlights, creating a sophisticated and creative atmosphere consistent with a premium film production house in a dark-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_Kv5GmYznDkyij9NSZvRtMYnAoHRZ_DpfgR1RATBzTfAtepZ5i7nzjWs-nH1gGnaPMUMc0I2LPpXJ6elsLpehFotJ1tz9UkEVxfEGYiXncaZABoBCuS895sqnSO8Ft4p1eeTxBe8Nfi2ZfVTrl-9ratQHvLkj2wOACOqwj2N4e2Bg4jJxzf3774XxBsXNTLDeDak4NqsywBZCj6P17PmcGboPA6EzU3xvBiDyIRjedD5sLJ5gI1fu"/>
+</div>
+</div>
+</div>
+<div class="relative z-20 max-w-4xl">
+<h1 class="font-display-lg text-display-md md:text-display-lg mb-8 leading-none">
+                    Producción audiovisual y fotografía para marcas que quieren <span class="italic text-primary">ser recordadas.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-2xl">
+                    Creamos conceptos, campañas y contenido visual desde Villavicencio para proyectos locales y nacionales.
+                </p>
+<div class="flex flex-col md:flex-row gap-6">
+<button class="bg-primary text-on-primary px-10 py-5 font-label-sm text-label-sm uppercase tracking-[0.2em] transition-all hover:bg-primary-container">
+                        Cotizar un proyecto
+                    </button>
+<button class="border border-outline px-10 py-5 font-label-sm text-label-sm uppercase tracking-[0.2em] transition-all hover:bg-on-surface/5">
+                        Ver proyectos
+                    </button>
+</div>
+</div>
+</section>
+<!-- Trust Strip -->
+<section class="py-16 border-y border-outline-variant/10 overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<p class="font-label-xs text-label-xs text-center text-on-surface-variant mb-10 uppercase tracking-widest">Selected Clients & Collaborations</p>
+<div class="flex flex-wrap justify-center md:justify-between items-center gap-12 opacity-40 grayscale contrast-125">
+<span class="font-display-md text-headline-md tracking-tighter">LUXE.CO</span>
+<span class="font-display-md text-headline-md tracking-tighter">VILLAVO</span>
+<span class="font-display-md text-headline-md tracking-tighter">MARCAX</span>
+<span class="font-display-md text-headline-md tracking-tighter">STUDIO.A</span>
+<span class="font-display-md text-headline-md tracking-tighter">URBAN.V</span>
+</div>
+</div>
+</section>
+<!-- Selected Projects Editorial Grid -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="flex justify-between items-end mb-24">
+<div>
+<h2 class="font-display-md text-display-md">Selected Projects</h2>
+<p class="font-label-sm text-label-sm text-primary uppercase tracking-widest mt-2">Visionary Content Production</p>
+</div>
+<div class="hidden md:block w-32 h-[1px] bg-outline-variant mb-6"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Project 1 (Large) -->
+<div class="md:col-span-8 group cursor-pointer gallery-hover">
+<div class="aspect-video overflow-hidden bg-surface-container mb-6">
+<img class="w-full h-full object-cover" data-alt="High-fashion commercial photography showing a model in an architectural space with stark lighting. The image has a deep, cinematic contrast and a refined monochromatic palette with hints of champagne. Part of a luxury brand campaign for Pantheon Studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB16OnRW5SXALJtorD7jl_82Y06RNN1jkhrL993AlJiypDNat6rC4-3zDBUmG3_lt3Pr0PazavAGMqYnIZvZ01Q-Dp5wzpyhQHpTVO83YgTX7ULDSiav5Om0JUW5m74w6tdI7VuSkIebh_rfyXpXZIbiaAqQn3H1O6y_at8gfHmNQuZ628Fi1IVo2ddvjQztG6j0sfr5Tsu-zmGVdRHHNzjiLur__oR0KIIQ1dUyPJOsdlogUw3jePK"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-xs text-label-xs text-primary uppercase">Campaña / Fashion</span>
+<h3 class="font-headline-md text-headline-md mt-2">The Architectural Body</h3>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">arrow_outward</span>
+</div>
+</div>
+<!-- Project 2 (Small) -->
+<div class="md:col-span-4 group cursor-pointer gallery-hover pt-12">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container mb-6">
+<img class="w-full h-full object-cover" data-alt="A sophisticated still-life product shot of high-end jewelry resting on a dark, reflective surface. The lighting is precise, highlighting delicate textures and creating a luxury aesthetic. Deep blacks and warm metallics dominate the scene." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABwGTaBnUiFCz9yMDHHborP5GnTubQh_rDq7eZGa_2XVA76j0nObP5N4gACoUjjXK5NYyBuMgbDoJX0iQtcJJ548V9im9FBPt_lkhf5uk4-Hf4AI2BNkWiz5jnVea3CElQsBWA1LAXDnf1LvT5BS-NQ7uVZ8NWJiDrGQlegt1R427doFmPkj_u17dXnnvUZj5D0TjQoDFttRJQInYxmigHqLcrqeRs5mkrCnnugkmoDJj_VZTcfHSH"/>
+</div>
+<div>
+<span class="font-label-xs text-label-xs text-primary uppercase">Fotografía Publicitaria</span>
+<h3 class="font-headline-md text-headline-md mt-2">Eternal Refraction</h3>
+</div>
+</div>
+<!-- Spacer for grid variety -->
+<div class="hidden md:block md:col-span-1"></div>
+<!-- Project 3 -->
+<div class="md:col-span-5 group cursor-pointer gallery-hover">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container mb-6">
+<img class="w-full h-full object-cover" data-alt="Cinematic production still from a car commercial. A luxury SUV drives through a mountain pass at twilight. The sky is a deep indigo, and the car's headlights pierce through a subtle mist. Expertly color-graded for a premium look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpt88OE7x_MXTOn5eFMZhp6JmPI6Bna-SBT4_OsNcvnWcrEOT2T9hyv0bqXApRzqfwdDX_j6LDgq0FkkNblMBaeuObBEf2l9TT25xedMU6kcyz0ur9wuW7h4S2xktNrKpGDkq-3RZqRELHTO6JlpB7qIbq44QYg4uec1wnDrK-Ztt2Qo40MlpO2cpfacYJEDClsajshROFlDeTZj4hTma80Bjvh6AewrD5GD684ocAg9ETpYcnrrBI"/>
+</div>
+<div>
+<span class="font-label-xs text-label-xs text-primary uppercase">Comercial / Automotriz</span>
+<h3 class="font-headline-md text-headline-md mt-2">The Path Forward</h3>
+</div>
+</div>
+<!-- Project 4 -->
+<div class="md:col-span-6 group cursor-pointer gallery-hover self-center">
+<div class="aspect-video overflow-hidden bg-surface-container mb-6">
+<img class="w-full h-full object-cover" data-alt="Interior architectural photography of a minimalist concrete studio. Clean lines, large shadows, and a singular light source create a dramatic, gallery-like feeling. The palette is muted gray and charcoal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl-JBOJHOKeCk6DTen7xAenfyJOslVoTgiIpRXuOPyysZmEMnhE8uTQgLhQ1pfuMhpyybQdiX-qRZYBo2GTx3kcnVu8jEroQPQy1Dm9fa7xzHFbffCErUVLWLdXfnQR8FjsGQ6iejmeYx-UZCummzVFb1Yy_32d-IX85SCviv5IjweCci49RepMOXI8O4-GbH8y_CZySZj_ZCCCS6AqLFZ3g_x-yCTC8EqJoX7b3-pB5etIivrtpDO"/>
+</div>
+<div>
+<span class="font-label-xs text-label-xs text-primary uppercase">Producción Audiovisual</span>
+<h3 class="font-headline-md text-headline-md mt-2">Space & Silence</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- Strategic Statement -->
+<section class="py-section-gap bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center gap-gutter">
+<div class="md:w-1/2">
+<div class="w-20 h-20 border border-primary/30 flex items-center justify-center mb-10">
+<span class="material-symbols-outlined text-primary text-3xl">auto_awesome</span>
+</div>
+<h2 class="font-display-md text-display-md mb-8 leading-tight">No producimos piezas aisladas. Construimos <span class="text-primary italic">sistemas visuales</span> que proyectan autoridad.</h2>
+</div>
+<div class="md:w-1/2 md:pl-16">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-6">
+                        Nuestra filosofía se basa en la elegancia estratégica. Cada cuadro de video y cada disparo de obturador está diseñado para cumplir un propósito dentro de la identidad de tu marca. 
+                    </p>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                        Desde nuestro estudio en Villavicencio, elevamos el estándar visual de la región, combinando técnica cinematográfica con una visión publicitaria global.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Services Grid -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<h2 class="font-display-md text-headline-lg mb-16">Expertise</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="group border border-outline-variant/30 p-10 hover:border-primary transition-colors duration-500 bg-surface-container-low">
+<span class="font-display-md text-headline-md text-outline opacity-30 mb-8 block">01</span>
+<h4 class="font-headline-md text-headline-md mb-4">Campañas</h4>
+<p class="font-body-md text-on-surface-variant mb-10">Conceptualización y ejecución de campañas 360 con alto impacto visual.</p>
+<div class="h-1 w-0 bg-primary transition-all duration-500 group-hover:w-full"></div>
+</div>
+<div class="group border border-outline-variant/30 p-10 hover:border-primary transition-colors duration-500 bg-surface-container-low">
+<span class="font-display-md text-headline-md text-outline opacity-30 mb-8 block">02</span>
+<h4 class="font-headline-md text-headline-md mb-4">Fotografía</h4>
+<p class="font-body-md text-on-surface-variant mb-10">Editorial, publicitaria y de producto con enfoque en el sector lujo.</p>
+<div class="h-1 w-0 bg-primary transition-all duration-500 group-hover:w-full"></div>
+</div>
+<div class="group border border-outline-variant/30 p-10 hover:border-primary transition-colors duration-500 bg-surface-container-low">
+<span class="font-display-md text-headline-md text-outline opacity-30 mb-8 block">03</span>
+<h4 class="font-headline-md text-headline-md mb-4">Contenido Social</h4>
+<p class="font-body-md text-on-surface-variant mb-10">Narrativas visuales optimizadas para plataformas digitales y redes sociales.</p>
+<div class="h-1 w-0 bg-primary transition-all duration-500 group-hover:w-full"></div>
+</div>
+<div class="group border border-outline-variant/30 p-10 hover:border-primary transition-colors duration-500 bg-surface-container-low">
+<span class="font-display-md text-headline-md text-outline opacity-30 mb-8 block">04</span>
+<h4 class="font-headline-md text-headline-md mb-4">Audiovisual</h4>
+<p class="font-body-md text-on-surface-variant mb-10">Producción cinematográfica, post-producción y motion graphics.</p>
+<div class="h-1 w-0 bg-primary transition-all duration-500 group-hover:w-full"></div>
+</div>
+</div>
+</section>
+<!-- Process Section -->
+<section class="py-section-gap bg-background overflow-x-hidden">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="mb-16">
+<h2 class="font-display-md text-headline-lg">El Proceso</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-2">Metodología de precisión</p>
+</div>
+<div class="flex flex-nowrap md:grid md:grid-cols-6 gap-8 overflow-x-auto pb-8 snap-x">
+<div class="min-w-[200px] snap-start">
+<span class="font-label-xs text-label-xs text-primary mb-2 block tracking-widest">STEP 01</span>
+<h5 class="font-headline-md text-headline-md mb-4 border-b border-outline-variant pb-2">Brief</h5>
+<p class="text-label-sm font-body-md text-on-surface-variant">Entendemos tus objetivos y audiencia.</p>
+</div>
+<div class="min-w-[200px] snap-start">
+<span class="font-label-xs text-label-xs text-primary mb-2 block tracking-widest">STEP 02</span>
+<h5 class="font-headline-md text-headline-md mb-4 border-b border-outline-variant pb-2">Concepto</h5>
+<p class="text-label-sm font-body-md text-on-surface-variant">Desarrollamos la idea creativa central.</p>
+</div>
+<div class="min-w-[200px] snap-start">
+<span class="font-label-xs text-label-xs text-primary mb-2 block tracking-widest">STEP 03</span>
+<h5 class="font-headline-md text-headline-md mb-4 border-b border-outline-variant pb-2">Prepro</h5>
+<p class="text-label-sm font-body-md text-on-surface-variant">Logística, casting y planeación técnica.</p>
+</div>
+<div class="min-w-[200px] snap-start">
+<span class="font-label-xs text-label-xs text-primary mb-2 block tracking-widest">STEP 04</span>
+<h5 class="font-headline-md text-headline-md mb-4 border-b border-outline-variant pb-2">Producción</h5>
+<h5 class="text-label-sm font-body-md text-on-surface-variant">Capturamos la esencia en set.</h5>
+</div>
+<div class="min-w-[200px] snap-start">
+<span class="font-label-xs text-label-xs text-primary mb-2 block tracking-widest">STEP 05</span>
+<h5 class="font-headline-md text-headline-md mb-4 border-b border-outline-variant pb-2">Postpro</h5>
+<p class="text-label-sm font-body-md text-on-surface-variant">Edición, color y diseño sonoro.</p>
+</div>
+<div class="min-w-[200px] snap-start">
+<span class="font-label-xs text-label-xs text-primary mb-2 block tracking-widest">STEP 06</span>
+<h5 class="font-headline-md text-headline-md mb-4 border-b border-outline-variant pb-2">Entrega</h5>
+<p class="text-label-sm font-body-md text-on-surface-variant">Finalización y despliegue de activos.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Studio Showcase -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-4 mb-12 md:mb-0">
+<h2 class="font-display-md text-display-md mb-8">Un espacio preparado para producir</h2>
+<p class="font-body-lg text-on-surface-variant mb-10 leading-relaxed">Nuestro estudio cuenta con tecnología de vanguardia y ambientes controlados diseñados para la máxima creatividad visual.</p>
+<a class="inline-flex items-center gap-4 font-label-sm text-label-sm uppercase tracking-widest text-primary hover:gap-6 transition-all" href="#">
+                        Tour del estudio <span class="material-symbols-outlined">arrow_right_alt</span>
+</a>
+</div>
+<div class="md:col-span-8">
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-square bg-surface-container overflow-hidden group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="Behind-the-scenes shot of a professional photography studio with high ceilings, massive softboxes, and several high-end camera rigs. The lighting is moody and directional, showcasing a high-performance production environment for Pantheon Studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQh5Q9dJP4itl0W2d8Dn1XyQi_byBis9VP_OReornNc7OpntzuP8XGklOoSjGMxQrIuGlvCpYQllQvuiubo5hfCZyybmNHZf1uTI34M0dvp0JM9a-sp7Tauh9UOC5lpamWkAOsn7gUFKYPQoGXM1jWS1YGW0CE9Ka1c-JkWwr5JLWcSQ_ED3teBP-m8n0ZGnM-BDDzr-0skk6ycwDel_AQdEowT5UahL19VZ2e7N5MjGg9ri1MtMSD"/>
+</div>
+<div class="aspect-[4/5] bg-surface-container overflow-hidden translate-y-12 group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="A close-up shot of a professional video editing suite with multiple monitors showing color grading timelines. The workspace is sleek, dark, and organized, with acoustic panels and warm task lighting. Consistent with a premium cinematic studio aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKLo3s_bTBTj_88eu0SQm6_jhBQhYCkpcIrtnVXjF6Kpy-1JBqEJ6E3yC-A8A3DaCldSPxzqD43xyfxF910gCiy_u8WzEqbcL7A_6VlULyhtK0CNbAdldhktPNpBcB8GCZiw-WtYdFW5Phj7Q1_iR9KztVFBo3_TlVazdZ9BCS3StBYWORMqKLwPFei2N0AVRUfCKODEwYf4L247ADJv1oXTuupnhfS07Qm-YYNnWaM91tyXmO7kO6"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Pantheon -->
+<section class="py-section-gap bg-surface-container-low border-t border-outline-variant/10">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-section-gap">
+<div>
+<h2 class="font-display-md text-display-md mb-12">Diferenciales</h2>
+<ul class="space-y-12">
+<li class="flex gap-8 items-start">
+<span class="material-symbols-outlined text-primary text-3xl shrink-0">movie_edit</span>
+<div>
+<h4 class="font-headline-md text-headline-md mb-2">Narrativa Cinematográfica</h4>
+<p class="font-body-md text-on-surface-variant">No solo grabamos; contamos historias con el lenguaje visual de la gran pantalla.</p>
+</div>
+</li>
+<li class="flex gap-8 items-start">
+<span class="material-symbols-outlined text-primary text-3xl shrink-0">architecture</span>
+<div>
+<h4 class="font-headline-md text-headline-md mb-2">Diseño de Set</h4>
+<p class="font-body-md text-on-surface-variant">Cuidamos cada detalle espacial para que la imagen sea impecable desde el origen.</p>
+</div>
+</li>
+<li class="flex gap-8 items-start">
+<span class="material-symbols-outlined text-primary text-3xl shrink-0">verified</span>
+<div>
+<h4 class="font-headline-md text-headline-md mb-2">Calidad Publicitaria</h4>
+<p class="font-body-md text-on-surface-variant">Entregables listos para competir en mercados internacionales de alta exigencia.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="aspect-video md:aspect-auto w-full h-full bg-background overflow-hidden">
+<img class="w-full h-full object-cover opacity-80" data-alt="A striking portrait of a film director on set, silhouetted against a bright backlight in a dark, hazy studio. The mood is intense, focused, and artistic, representing the visionary leadership at Pantheon Studio. Deep contrast and cinematic grain." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaXLXz9QBNruuTgsB7PIFlXV56YCKZOcG7V4gDAbA_yaqIOXX2b1--axulGrQpJsWTDUtNGnvrdmJljw2teUkPxpWLl491VvLrTH8hAgjzoOSMOG3ErN8OyO71pFB7mJmc9sVLIizVTjhpZDprcJWXapQZF24dPteuOguSEQeYk4MkTCdF-MmECrv7bos7HuIYU9HZ4-CkNghU_B0WQ3lFFCSnZaKsBP8OmYWBPeVAcs68nR82kOuN"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-section-gap text-center px-margin-mobile">
+<div class="max-w-3xl mx-auto">
+<p class="font-label-sm text-label-sm text-primary uppercase tracking-[0.3em] mb-8">El momento es ahora</p>
+<h2 class="font-display-lg text-display-md md:text-display-lg mb-16 leading-tight">Hablemos de lo que necesitas producir</h2>
+<div class="flex flex-col md:flex-row justify-center gap-8">
+<button class="bg-on-surface text-background px-12 py-6 font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary transition-colors">
+                        Iniciar consulta
+                    </button>
+<a class="border border-outline px-12 py-6 font-label-sm text-label-sm uppercase tracking-widest hover:border-primary transition-colors" href="mailto:hello@pantheon.studio">
+                        hello@pantheon.studio
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface dark:bg-surface-container-lowest border-t border-outline-variant/30 w-full py-section-gap">
+<div class="grid grid-cols-4 md:grid-cols-12 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-4 md:col-span-6">
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface dark:text-on-surface mb-12">
+                    PANTHEON
+                </div>
+<p class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant max-w-xs">
+                    © 2024 PANTHEON STUDIO. CINEMATIC ELEGANCE. VILLAVICENCIO, COLOMBIA.
+                </p>
+</div>
+<div class="col-span-2 md:col-span-2 flex flex-col gap-4">
+<p class="font-label-sm text-label-sm text-primary mb-4 uppercase">Studio</p>
+<a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Proyectos</a>
+<a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Servicios</a>
+<a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Nosotros</a>
+<a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Contacto</a>
+</div>
+<div class="col-span-2 md:col-span-2 flex flex-col gap-4">
+<p class="font-label-sm text-label-sm text-primary mb-4 uppercase">Connect</p>
+<a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Instagram</a>
+<a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">WhatsApp</a>
+<a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Email</a>
+<a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Location</a>
+</div>
+<div class="col-span-2 md:col-span-2 flex flex-col gap-4">
+<p class="font-label-sm text-label-sm text-primary mb-4 uppercase">Legal</p>
+<a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Legal</a>
+<a class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Privacy</a>
+</div>
+</div>
+</footer>
+<script>
+        // Smooth scroll reveal effect
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'ease-out', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+
+        // Sticky Navbar background shift on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-background/95');
+                nav.classList.remove('bg-transparent');
+            } else {
+                nav.classList.remove('bg-background/95');
+                nav.classList.add('bg-transparent');
+            }
+        });
+    </script>
+</body></html>

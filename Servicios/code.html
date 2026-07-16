@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Servicios | Pantheon Studio</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#544524",
+                    "on-primary-container": "#463819",
+                    "on-tertiary-fixed-variant": "#484742",
+                    "primary": "#dac49a",
+                    "error-container": "#93000a",
+                    "surface-tint": "#dac49a",
+                    "surface-container-highest": "#353534",
+                    "on-tertiary-container": "#3b3a35",
+                    "secondary-container": "#474742",
+                    "on-primary": "#3c2f10",
+                    "outline": "#989083",
+                    "tertiary-fixed-dim": "#c9c6bf",
+                    "on-primary-fixed": "#251a01",
+                    "inverse-surface": "#e5e2e1",
+                    "on-secondary-fixed": "#1c1c18",
+                    "secondary-fixed": "#e5e2db",
+                    "tertiary": "#c9c6bf",
+                    "primary-container": "#b6a27a",
+                    "secondary": "#c9c6c0",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#131313",
+                    "surface-container-high": "#2a2a2a",
+                    "on-error": "#690005",
+                    "surface-container-low": "#1c1b1b",
+                    "on-surface": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#474742",
+                    "tertiary-fixed": "#e5e2db",
+                    "surface-variant": "#353534",
+                    "on-tertiary": "#31312c",
+                    "background": "#131313",
+                    "on-surface-variant": "#cec5b8",
+                    "on-tertiary-fixed": "#1c1c18",
+                    "on-background": "#e5e2e1",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#31312c",
+                    "outline-variant": "#4c463c",
+                    "tertiary-container": "#a6a49e",
+                    "primary-fixed": "#f7e0b4",
+                    "inverse-primary": "#6d5c3a",
+                    "secondary-fixed-dim": "#c9c6c0",
+                    "surface-container": "#201f1f",
+                    "surface-bright": "#3a3939",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-on-surface": "#313030",
+                    "on-secondary-container": "#b7b5af",
+                    "surface": "#131313",
+                    "primary-fixed-dim": "#dac49a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "gutter": "32px",
+                    "base": "8px",
+                    "section-gap": "128px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Bodoni Moda"],
+                    "body-md": ["Inter"],
+                    "display-md": ["Bodoni Moda"],
+                    "headline-lg-mobile": ["Bodoni Moda"],
+                    "body-lg": ["Inter"],
+                    "label-xs": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Bodoni Moda"],
+                    "headline-lg": ["Bodoni Moda"]
+            },
+            "fontSize": {
+                    "display-lg": ["80px", {"lineHeight": "90px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-md": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-xs": ["10px", {"lineHeight": "14px", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .mask-image-bottom {
+            mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+        }
+        .glass-card {
+            background: rgba(25, 25, 25, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(182, 162, 122, 0.1);
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-xl dark:bg-background/80 border-b border-outline-variant/20">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base max-w-container-max mx-auto">
+<div class="font-display-md text-display-md uppercase tracking-tighter text-on-surface dark:text-on-background">
+                Pantheon
+            </div>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Proyectos</a>
+<a class="font-label-sm text-label-sm text-primary dark:text-primary-fixed border-b border-primary pb-1" href="#">Servicios</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Estudio</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Nosotros</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface transition-colors duration-300" href="#">Contacto</a>
+</div>
+<button class="px-6 py-2 border border-primary text-primary font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all duration-300 active:scale-95">
+                Cotizar proyecto
+            </button>
+</div>
+</nav>
+<main class="relative">
+<!-- Hero Section -->
+<section class="min-h-[80vh] flex flex-col justify-center px-margin-mobile md:px-margin-desktop pt-section-gap">
+<div class="max-w-4xl mx-auto text-center">
+<span class="font-label-xs text-label-xs uppercase tracking-[0.3em] text-primary mb-6 block">Nuestro Expertise</span>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg leading-tight mb-8">
+                    Servicios de producción diseñados para marcas estratégicas.
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12">
+                    Transformamos visiones conceptuales en activos visuales de alto impacto que resuenan con la audiencia y elevan la identidad corporativa.
+                </p>
+<div class="flex justify-center">
+<span class="material-symbols-outlined text-4xl animate-bounce text-outline-variant">expand_more</span>
+</div>
+</div>
+</section>
+<!-- Services Container -->
+<div class="space-y-section-gap pb-section-gap">
+<!-- Service 01: Campañas -->
+<section class="reveal-on-scroll px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5 order-2 md:order-1">
+<div class="flex items-center gap-4 mb-6">
+<span class="font-display-md text-display-md italic text-outline-variant opacity-30">01</span>
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+</div>
+<h2 class="font-display-md text-display-md mb-6">Campañas Conceptuales</h2>
+<div class="space-y-6 text-on-surface-variant">
+<div>
+<h3 class="font-label-sm text-label-sm text-primary uppercase mb-2">Desafío</h3>
+<p>La saturación visual impide que las marcas conecten emocionalmente con sus clientes.</p>
+</div>
+<div>
+<h3 class="font-label-sm text-label-sm text-primary uppercase mb-2">Proceso</h3>
+<p>Desde la narrativa estratégica hasta la ejecución técnica, construimos mundos visuales coherentes.</p>
+</div>
+<div>
+<h3 class="font-label-sm text-label-sm text-primary uppercase mb-2">Entregables</h3>
+<p>Lookbooks, videos hero de campaña y material de prensa de alta fidelidad.</p>
+</div>
+</div>
+<button class="mt-10 px-8 py-4 border border-on-surface text-on-surface font-label-sm text-label-sm uppercase tracking-widest hover:bg-on-surface hover:text-background transition-all duration-300">
+                            Solicitar propuesta personalizada
+                        </button>
+</div>
+<div class="md:col-span-7 order-1 md:order-2 aspect-[4/5] relative overflow-hidden">
+<img class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" data-alt="A high-fashion cinematic portrait of a model in a sharp, structured black silk suit standing against a dark charcoal concrete wall with dramatic shadows and golden side lighting. The aesthetic is sophisticated and minimalist, reflecting a premium production studio brand with cinematic elegance and high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfG6tuqSJJvNe3Ugr3xfdl63sxwLxtgbeWE0ZODfq2uR_JCT-_2lAp_EB1FPNwIVGxsSggqNdE78gEO6P7w0PhLVkhaoRadtbPa6HhfGI8TzK-q3BgPsXSGWRA3ifx0vagzc4PiDGfbozMsmw4ZgMt7lSad32OfFoxkMZiUza6zLCYcznotEwKjrbhCMzM7Ign3L9OuWiljJp2wpXW5kJUv_akJ1PjNFNDSNlyYOOXLqz2ARUScqTm"/>
+</div>
+</div>
+</section>
+<!-- Service 02: Fotografía -->
+<section class="reveal-on-scroll px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-7 aspect-[16/9] relative overflow-hidden">
+<img class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" data-alt="Exquisite macro product photography of a luxury perfume bottle on a reflective obsidian surface. Thin hairlines of light define the glass edges against a deep black background. The mood is high-end and utilitarian, with a focus on precision and light-play, using a monochromatic depth and golden champagne accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQKQfMROUhylIOk2J26mkg-gQOvviiiBksXKgCUOW9QUtH87e-MBtBdIyN8N_5hGtB6uS-TDFcjZpSfExV50WgZAMcMZaELeTvjC3LrD_WMDzyO5HzsaMRtDtwSZy_dTv1SKBnjZpZKKViZZGEo4Tqam2EKi5QfNKFMEFhSG_nT3W0W6EQhinDTjSt1xSF9X5rWwrAE-6bgU9X1vAvJxWVgWM9SFGc2LqEgf1kMldvF5OTFXH0IVpv"/>
+</div>
+<div class="md:col-span-5 pl-0 md:pl-12">
+<div class="flex items-center gap-4 mb-6">
+<span class="font-display-md text-display-md italic text-outline-variant opacity-30">02</span>
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+</div>
+<h2 class="font-display-md text-display-md mb-6">Fotografía Publicitaria</h2>
+<div class="space-y-6 text-on-surface-variant">
+<div>
+<h3 class="font-label-sm text-label-sm text-primary uppercase mb-2">Desafío</h3>
+<p>Productos de alta gama que no lucen el valor real que representan en el mercado.</p>
+</div>
+<div>
+<h3 class="font-label-sm text-label-sm text-primary uppercase mb-2">Proceso</h3>
+<p>Iluminación técnica de precisión y retoque digital de grado editorial (High-End Retouching).</p>
+</div>
+<div>
+<h3 class="font-label-sm text-label-sm text-primary uppercase mb-2">Entregables</h3>
+<p>Master shots en alta resolución, archivos RAW revelados y licencias comerciales.</p>
+</div>
+</div>
+<button class="mt-10 px-8 py-4 border border-on-surface text-on-surface font-label-sm text-label-sm uppercase tracking-widest hover:bg-on-surface hover:text-background transition-all duration-300">
+                            Solicitar propuesta personalizada
+                        </button>
+</div>
+</div>
+</section>
+<!-- Service 03: Audiovisual (Bento Style) -->
+<section class="reveal-on-scroll px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="glass-card p-12 relative overflow-hidden">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div>
+<div class="flex items-center gap-4 mb-6">
+<span class="font-display-md text-display-md italic text-outline-variant opacity-30">03</span>
+<h2 class="font-display-md text-display-md">Producción Audiovisual</h2>
+</div>
+<p class="font-body-lg text-body-lg mb-8 max-w-md">Narrativa en movimiento para marcas que buscan el estándar cinematográfico en sus comunicaciones.</p>
+<div class="grid grid-cols-1 gap-6 mb-10">
+<div class="border-l-2 border-primary/30 pl-4">
+<h4 class="font-label-sm text-label-sm text-on-surface mb-1 uppercase">Business Problem</h4>
+<p class="text-on-surface-variant text-sm">La falta de dinamismo en la comunicación digital reduce el engagement y la autoridad de marca.</p>
+</div>
+<div class="border-l-2 border-primary/30 pl-4">
+<h4 class="font-label-sm text-label-sm text-on-surface mb-1 uppercase">Deliverables</h4>
+<p class="text-on-surface-variant text-sm">Comerciales de TV, documentales de marca, cortos de lifestyle y corrección de color Davinci.</p>
+</div>
+</div>
+<button class="px-8 py-4 bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+                                Solicitar propuesta personalizada
+                            </button>
+</div>
+<div class="grid grid-cols-2 gap-4 h-full min-h-[400px]">
+<div class="relative overflow-hidden">
+<img class="object-cover w-full h-full grayscale opacity-50 hover:opacity-100 transition-opacity duration-500" data-alt="A cinematic behind-the-scenes shot of a professional film set. A RED camera on a gimbal focuses on a brightly lit set piece. The background is dark and moody with blue and amber lens flares. Sophisticated production environment for a luxury brand video project." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzHlNRqaDNFbQdKUJdpabyU_S_E5tTYM9dEkiD3Ekjt1R4EYIv4JxXMqhFjFd1JIpgA7YCOitN53W2Z6qdYe48Em41kYAxJ62L4KgCO-k_TonnKmuCM57tIZonNAsNY_tZUzi2kBXAq3QFDzsQCiTdabBb0LteDDDzbXwF0vTopRN_QVYhOSYU4pUazrHCtjd_bY61NwtOLDWcXQ-ADcdOCHACt0DswLBqFPg__8VOOOeQojp6tGeO"/>
+</div>
+<div class="relative overflow-hidden mt-8">
+<img class="object-cover w-full h-full grayscale opacity-50 hover:opacity-100 transition-opacity duration-500" data-alt="A close up of a video editing suite with multiple monitors showing color correction waveforms and high-definition footage of a luxury architectural space. The room is dark, illuminated only by the glow of professional grading monitors. Artistic, precise, and tech-focused." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-57qlbC6W-_CdoNx3rdZJwsDlh6-kAjuueb8G3GCxlKwDRHS89GEu4PabFAbxJEcmmV_NBZ9cfAZ9vmmui6ZOi84yO_qAQQsGt3xDLt3C73eYB-H0ks36OAEv9gWOqaWOVbVz7cLUOF2ZRh6PiIxpYXOoBffgUmeQ2HuatMouYIRUvEvXDIUxaNS7IzSmBVB3f6uvNXl7KHAPxMpNRSNDhmHpYttShqfcmTExbXblUvAi3wMS742r"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Service 04: Redes & 05: Alquiler (2 Column Grid) -->
+<section class="reveal-on-scroll px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Contenido Redes -->
+<div class="border border-outline-variant/20 p-8 flex flex-col justify-between group hover:bg-surface-container transition-colors duration-500">
+<div>
+<span class="font-display-md text-display-md italic text-outline-variant opacity-30 mb-4 block">04</span>
+<h3 class="font-display-md text-headline-md mb-6">Contenido para Redes</h3>
+<p class="text-on-surface-variant mb-8">Estrategia visual optimizada para formatos verticales. Reels, TikToks y Stories que mantienen la elegancia de la marca en entornos rápidos.</p>
+<ul class="space-y-3 mb-10">
+<li class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface uppercase tracking-wider">
+<span class="material-symbols-outlined text-primary text-lg">check</span> Vertical Video Mastery
+                                </li>
+<li class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface uppercase tracking-wider">
+<span class="material-symbols-outlined text-primary text-lg">check</span> Dynamic Storytelling
+                                </li>
+<li class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface uppercase tracking-wider">
+<span class="material-symbols-outlined text-primary text-lg">check</span> Monthly Content Packs
+                                </li>
+</ul>
+</div>
+<button class="w-fit px-6 py-3 border border-outline text-label-sm font-label-sm uppercase tracking-widest group-hover:border-primary group-hover:text-primary transition-all duration-300">
+                            Solicitar propuesta
+                        </button>
+</div>
+<!-- Alquiler Estudio -->
+<div class="border border-outline-variant/20 p-8 flex flex-col justify-between group hover:bg-surface-container transition-colors duration-500">
+<div>
+<span class="font-display-md text-display-md italic text-outline-variant opacity-30 mb-4 block">05</span>
+<h3 class="font-display-md text-headline-md mb-6">Alquiler de Estudio</h3>
+<p class="text-on-surface-variant mb-8">Espacio diseñado por y para creativos. 250m² de posibilidades con techos industriales, luz natural y equipamiento Profoto de última generación.</p>
+<ul class="space-y-3 mb-10">
+<li class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface uppercase tracking-wider">
+<span class="material-symbols-outlined text-primary text-lg">check</span> Full Grip &amp; Lighting kit
+                                </li>
+<li class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface uppercase tracking-wider">
+<span class="material-symbols-outlined text-primary text-lg">check</span> Private Hair &amp; Makeup area
+                                </li>
+<li class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface uppercase tracking-wider">
+<span class="material-symbols-outlined text-primary text-lg">check</span> Client Lounge &amp; Kitchen
+                                </li>
+</ul>
+</div>
+<button class="w-fit px-6 py-3 border border-outline text-label-sm font-label-sm uppercase tracking-widest group-hover:border-primary group-hover:text-primary transition-all duration-300">
+                            Reservar espacio
+                        </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Contact Callout -->
+<section class="reveal-on-scroll py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-low">
+<div class="max-w-container-max mx-auto text-center">
+<h2 class="font-display-lg text-headline-lg-mobile md:text-display-md mb-8">¿Listo para elevar tu presencia visual?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-xl mx-auto">Nuestro equipo estratégico está listo para analizar tu marca y proponer una solución estética a medida.</p>
+<div class="flex flex-col md:flex-row gap-gutter justify-center items-center">
+<button class="w-full md:w-auto px-12 py-5 bg-on-surface text-background font-label-sm text-label-sm uppercase tracking-[0.2em] hover:bg-primary hover:text-on-primary transition-all duration-300">
+                        Agendar Consultoría
+                    </button>
+<a class="font-label-sm text-label-sm uppercase tracking-widest border-b border-primary text-primary hover:text-on-surface hover:border-on-surface transition-all duration-300" href="mailto:hola@pantheon.studio">hola@pantheon.studio</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap bg-surface dark:bg-surface-container-lowest border-t border-outline-variant/30">
+<div class="grid grid-cols-4 md:grid-cols-12 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Brand Column -->
+<div class="col-span-4 md:col-span-6">
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface dark:text-on-surface mb-8">
+                    PANTHEON
+                </div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs mb-12">
+                    Estudio de producción creativa especializado en marcas de lujo, arquitectura y moda.
+                </p>
+<p class="font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant">
+                    © 2024 PANTHEON STUDIO. CINEMATIC ELEGANCE.
+                </p>
+</div>
+<!-- Links Columns -->
+<div class="col-span-2 md:col-span-2 flex flex-col gap-4">
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-primary mb-2">Estudio</span>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">Proyectos</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">Servicios</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">Estudio</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">Nosotros</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">Contacto</a>
+</div>
+<div class="col-span-2 md:col-span-2 flex flex-col gap-4">
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-primary mb-2">Social</span>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">Instagram</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">WhatsApp</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">Email</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">Location</a>
+</div>
+<div class="col-span-4 md:col-span-2 flex flex-col gap-4">
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-primary mb-2">Legal</span>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">Legal</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1" href="#">Privacy</a>
+</div>
+</div>
+</footer>
+<script>
+        // Intersection Observer for reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body></html>
