@@ -1,29 +1,43 @@
 // Build a connected static site from the section folders.
 const fs = require('fs');
 const path = require('path');
+const sharp = require('sharp');
 
 const root = __dirname;
 const outDir = path.join(root, 'site');
 const assetsDir = path.join(outDir, 'assets');
+// Start assets from a clean slate so stale files (old PNGs, renamed images)
+// don't linger and bloat the deploy. tw.css is written afterwards by the CLI.
+fs.rmSync(assetsDir, { recursive: true, force: true });
 fs.mkdirSync(assetsDir, { recursive: true });
 
-// --- Brand assets (from /Info) ---------------------------------------------
-const brandAssets = [
-  { from: 'Info/Captura de pantalla 2026-07-15 162100.png', to: 'pantheon-wordmark.png' },
-  { from: 'Info/472154790_2341703699501172_7768970952726760596_n.jpg', to: 'pantheon-monogram.jpg' },
-  { from: 'fondo/bc5b47e9-9e73-44e9-b678-bbbba545f417.png', to: 'hero-wide.png' },
-  { from: 'Info/ChatGPT Image 15 jul 2026, 06_06_43 p.m..png', to: 'estudio-fisico.png' },
-  { from: 'Info/baeef1c5-f404-4c89-a4fc-3dca5ec9ded6.png', to: 'estudio-bg.png' },
-  { from: 'Info/b8c11939-8400-44f0-9136-d69e39ec1ddd.png', to: 'diferenciales-dark.png' },
-  { from: 'Fotos/Captura de pantalla 2026-07-16 150852.png', to: 'proj-gastronomia.png' },
-  { from: 'Fotos/Captura de pantalla 2026-07-16 151008.png', to: 'proj-cocteleria.png' },
-  { from: 'Fotos/Captura de pantalla 2026-07-16 151052.png', to: 'proj-moda.png' },
-  { from: 'Fotos/Captura de pantalla 2026-07-16 151201.png', to: 'proj-nupcial.png' },
-  { from: 'Fotos/Captura de pantalla 2026-07-16 151251.png', to: 'proj-danza.png' },
-  { from: 'Fotos/Captura de pantalla 2026-07-16 151336.png', to: 'proj-retrato.png' },
+// --- Images: optimize source photos to WebP (width = max output width) ------
+const images = [
+  { from: 'fondo/bc5b47e9-9e73-44e9-b678-bbbba545f417.png',            to: 'hero-wide.webp',          width: 1920, q: 74 },
+  { from: 'Info/ChatGPT Image 15 jul 2026, 06_06_43 p.m..png',         to: 'estudio-fisico.webp',     width: 1100, q: 78 },
+  { from: 'Info/baeef1c5-f404-4c89-a4fc-3dca5ec9ded6.png',             to: 'estudio-bg.webp',         width: 1920, q: 74 },
+  { from: 'Info/b8c11939-8400-44f0-9136-d69e39ec1ddd.png',             to: 'diferenciales-dark.webp', width: 1920, q: 76 },
+  { from: 'Fotos/Captura de pantalla 2026-07-16 150852.png',           to: 'proj-gastronomia.webp',   width: 900,  q: 76 },
+  { from: 'Fotos/Captura de pantalla 2026-07-16 151008.png',           to: 'proj-cocteleria.webp',    width: 900,  q: 76 },
+  { from: 'Fotos/Captura de pantalla 2026-07-16 151052.png',           to: 'proj-moda.webp',          width: 900,  q: 76 },
+  { from: 'Fotos/Captura de pantalla 2026-07-16 151201.png',           to: 'proj-nupcial.webp',       width: 900,  q: 76 },
+  { from: 'Fotos/Captura de pantalla 2026-07-16 151251.png',           to: 'proj-danza.webp',         width: 900,  q: 76 },
+  { from: 'Fotos/Captura de pantalla 2026-07-16 151336.png',           to: 'proj-retrato.webp',       width: 900,  q: 76 },
 ];
-for (const a of brandAssets) {
-  fs.copyFileSync(path.join(root, a.from), path.join(assetsDir, a.to));
+
+async function processImages() {
+  // Favicon monogram (small) — copy as-is.
+  fs.copyFileSync(
+    path.join(root, 'Info/472154790_2341703699501172_7768970952726760596_n.jpg'),
+    path.join(assetsDir, 'pantheon-monogram.jpg')
+  );
+  for (const img of images) {
+    await sharp(path.join(root, img.from))
+      .resize({ width: img.width, withoutEnlargement: true })
+      .webp({ quality: img.q })
+      .toFile(path.join(assetsDir, img.to));
+  }
+  console.log(`optimized ${images.length} images -> webp`);
 }
 
 // --- Location data ----------------------------------------------------------
@@ -38,10 +52,10 @@ const INSTAGRAM_URL = 'https://www.instagram.com/pantheonstudio.com.co/';
 
 // source folder -> output filename
 const pages = [
-  { src: 'Home',        out: 'index.html',      sections: ['ubicacion'] },
-  { src: 'Servicios',   out: 'servicios.html',  sections: ['ubicacion'] },
-  { src: 'Proyectos',   out: 'proyectos.html',  sections: [] },
-  { src: 'Cotización',  out: 'cotizacion.html', sections: ['ubicacion'] },
+  { src: 'Home',        out: 'index.html',      sections: ['ubicacion'], title: 'Pantheon Studio | Producción Audiovisual & Fotografía' },
+  { src: 'Servicios',   out: 'servicios.html',  sections: ['ubicacion'], title: 'Servicios | Pantheon Studio' },
+  { src: 'Proyectos',   out: 'proyectos.html',  sections: [],            title: 'Proyectos | Pantheon Studio' },
+  { src: 'Cotización',  out: 'cotizacion.html', sections: ['ubicacion'], title: 'Cotización | Pantheon Studio' },
 ];
 
 // --- Injected content sections (design-system styled) -----------------------
@@ -102,7 +116,9 @@ const LOGO_CSS = `
 </style>
 `;
 
-const WORDMARK_NAV = '<a href="index.html" aria-label="Pantheon Studio - Inicio" class="ph-logo shrink-0 text-[20px] md:text-[26px]"><span class="ph-logo__word">PANTHEON</span><span class="ph-logo__sub">studio</span></a>';
+// No aria-label: the visible wordmark ("PANTHEON studio") is the accessible
+// name, so it never mismatches (axe: label-content-name-mismatch).
+const WORDMARK_NAV = '<a href="index.html" class="ph-logo shrink-0 text-[20px] md:text-[26px]"><span class="ph-logo__word">PANTHEON</span><span class="ph-logo__sub">studio</span></a>';
 const WORDMARK_FOOTER = '<span class="ph-logo text-[34px] md:text-[48px] mb-10"><span class="ph-logo__word">PANTHEON</span><span class="ph-logo__sub">studio</span></span>';
 
 function applyLogos(html) {
@@ -125,25 +141,25 @@ function applyLogos(html) {
 // the whole interface so the background can be admired on its own. -----------
 const NEW_HERO = `<!-- Cinematic Hero -->
 <section id="hero-section" class="relative w-full h-screen overflow-hidden bg-[#0e0e0e]">
-<img class="hero-main absolute inset-0 w-full h-full object-cover" src="assets/hero-wide.png" alt="Pantheon Studio — set de producción con el monograma iluminado"/>
+<img class="hero-main absolute inset-0 w-full h-full object-cover" src="assets/hero-wide.webp" alt="Pantheon Studio — set de producción con el monograma iluminado" width="1672" height="941" fetchpriority="high" decoding="async"/>
 </section>
 `;
 
 // "Selected Projects" -> grilla editorial con fotos reales del estudio.
 const projects = [
-  { img: 'proj-gastronomia.png', cat: 'Gastronomía',        title: 'Alta Cocina',        alt: 'Fotografía gastronómica de un plato de sashimi sobre lino' },
-  { img: 'proj-cocteleria.png',  cat: 'Coctelería',          title: 'Mixología de Autor', alt: 'Fotografía de coctelería, un cóctel sobre mesa de madera' },
-  { img: 'proj-moda.png',        cat: 'Editorial de Moda',   title: 'Statement',          alt: 'Editorial de moda con botas plataforma blancas en estudio' },
-  { img: 'proj-nupcial.png',     cat: 'Retrato Editorial',   title: 'Serenidad',          alt: 'Retrato editorial de una mujer con ramo de flores' },
-  { img: 'proj-danza.png',       cat: 'Danza & Movimiento',  title: 'Ingravidez',         alt: 'Bailarina en salto dentro del estudio' },
-  { img: 'proj-retrato.png',     cat: 'Retrato',             title: 'Carácter',           alt: 'Retrato de estudio de una mujer con chaqueta de cuero' },
+  { img: 'proj-gastronomia.webp', w: 600, h: 873, cat: 'Gastronomía',        title: 'Alta Cocina',        alt: 'Fotografía gastronómica de un plato de sashimi sobre lino' },
+  { img: 'proj-cocteleria.webp',  w: 587, h: 869, cat: 'Coctelería',          title: 'Mixología de Autor', alt: 'Fotografía de coctelería, un cóctel sobre mesa de madera' },
+  { img: 'proj-moda.webp',        w: 680, h: 852, cat: 'Editorial de Moda',   title: 'Statement',          alt: 'Editorial de moda con botas plataforma blancas en estudio' },
+  { img: 'proj-nupcial.webp',     w: 593, h: 859, cat: 'Retrato Editorial',   title: 'Serenidad',          alt: 'Retrato editorial de una mujer con ramo de flores' },
+  { img: 'proj-danza.webp',       w: 636, h: 857, cat: 'Danza & Movimiento',  title: 'Ingravidez',         alt: 'Bailarina en salto dentro del estudio' },
+  { img: 'proj-retrato.webp',     w: 634, h: 868, cat: 'Retrato',             title: 'Carácter',           alt: 'Retrato de estudio de una mujer con chaqueta de cuero' },
 ];
 
 const projectCards = projects.map((p, i) => {
   const n = String(i + 1).padStart(2, '0');
   return `
     <article class="break-inside-avoid mb-gutter group relative overflow-hidden bg-surface-container cursor-pointer">
-      <img class="block w-full h-auto object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]" src="assets/${p.img}" alt="${p.alt}"/>
+      <img class="block w-full h-auto object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]" src="assets/${p.img}" alt="${p.alt}" width="${p.w}" height="${p.h}" loading="lazy" decoding="async"/>
       <span class="absolute inset-0 z-20 ring-1 ring-inset ring-outline-variant/15 group-hover:ring-primary/30 transition-colors duration-500 pointer-events-none"></span>
       <div class="absolute inset-0 z-10 bg-gradient-to-t from-background via-background/15 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
       <div class="absolute inset-x-0 bottom-0 z-20 p-6 flex items-end justify-between gap-4">
@@ -176,7 +192,7 @@ ${projectCards}
 // completo, mostrada íntegra (16:9) para no recortar el texto integrado.
 const DIFERENCIALES = `<!-- Why Pantheon -->
 <section class="w-full bg-background overflow-hidden">
-  <img src="assets/diferenciales-dark.png" alt="Diferenciales de Pantheon Studio: Narrativa Cinematográfica, Diseño de Set y Calidad Publicitaria" class="block w-full h-auto"/>
+  <img src="assets/diferenciales-dark.webp" alt="Diferenciales de Pantheon Studio: Narrativa Cinematográfica, Diseño de Set y Calidad Publicitaria" width="1672" height="941" loading="lazy" decoding="async" class="block w-full h-auto"/>
 </section>
 `;
 
@@ -184,7 +200,7 @@ const DIFERENCIALES = `<!-- Why Pantheon -->
 // con el texto en la esquina inferior izquierda (no tapa el wordmark ni la escena).
 const STUDIO_SHOWCASE = `<!-- Studio Showcase -->
 <section class="relative min-h-[85vh] flex items-end overflow-hidden bg-[#0e0e0e]">
-  <img src="assets/estudio-bg.png" alt="Interior del estudio Pantheon durante una producción, con iluminación cinematográfica" class="absolute inset-0 w-full h-full object-cover object-center"/>
+  <img src="assets/estudio-bg.webp" alt="Interior del estudio Pantheon durante una producción, con iluminación cinematográfica" width="1672" height="941" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-center"/>
   <!-- Degradado para legibilidad: oscurece la base sin tapar el centro. -->
   <div class="absolute inset-0 bg-gradient-to-t from-background via-background/45 via-30% to-transparent to-70% pointer-events-none"></div>
   <!-- Texto: esquina inferior derecha (zona marcada) -->
@@ -209,7 +225,7 @@ const EL_ESTUDIO = `<!-- El Estudio -->
   <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
     <!-- Imagen del estudio físico (full-bleed izquierda, altura completa, esquinas rectas) -->
     <figure class="md:col-span-6 lg:col-span-6 relative h-[60vh] md:h-[90vh] overflow-hidden bg-surface-container group">
-      <img src="assets/estudio-fisico.png" alt="Fachada de Pantheon Studio en Villavicencio, Colombia" class="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"/>
+      <img src="assets/estudio-fisico.webp" alt="Fachada de Pantheon Studio en Villavicencio, Colombia" width="991" height="1588" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"/>
       <span class="absolute inset-0 ring-1 ring-inset ring-outline-variant/20 pointer-events-none"></span>
     </figure>
     <!-- Texto -->
@@ -334,13 +350,137 @@ function ctaGlow(html) {
   );
 }
 
-function addHeadExtras(html) {
-  html = html.replace(
-    '<meta charset="utf-8"/>',
-    '<meta charset="utf-8"/>\n<link rel="icon" type="image/jpeg" href="assets/pantheon-monogram.jpg"/>'
+// Replace the external grain texture (grainy-gradients.vercel.app/noise.svg,
+// which 404s) with an equivalent self-contained inline SVG — no network request,
+// no console error, works offline.
+const NOISE_DATA_URI =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E" +
+  "%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E" +
+  "%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E";
+
+function inlineNoise(html) {
+  return html.replace(
+    /url\(["']?https:\/\/grainy-gradients\.vercel\.app\/noise\.svg["']?\)/g,
+    'url("' + NOISE_DATA_URI + '")'
   );
+}
+
+// Swap the Tailwind CDN runtime for the pre-compiled static stylesheet.
+function staticTailwind(html) {
+  html = html.replace(
+    /<script src="https:\/\/cdn\.tailwindcss\.com[^"]*"><\/script>/,
+    '<link rel="stylesheet" href="assets/tw.css"/>'
+  );
+  html = html.replace(/\s*<script id="tailwind-config">[\s\S]*?<\/script>/, '');
+  return html;
+}
+
+const HEAD_META =
+  '<meta charset="utf-8"/>\n' +
+  '<link rel="icon" type="image/jpeg" href="assets/pantheon-monogram.jpg"/>\n' +
+  '<meta name="theme-color" content="#131313"/>\n' +
+  '<meta name="description" content="Pantheon Studio — estudio de producción audiovisual y fotografía en Villavicencio. Estética cinematográfica para marcas: campañas, editorial, gastronomía y más."/>\n' +
+  '<link rel="preconnect" href="https://fonts.googleapis.com"/>\n' +
+  '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>';
+
+// One consolidated Google Fonts request with ONLY the weights the site uses:
+// Bodoni Moda 400 (regular + italic), Inter 300/400/600/700, and the icon font
+// pinned to weight 400 with FILL toggle — instead of three render-blocking tags
+// pulling the full 100..900 / 100..700 ranges (huge, most weights unused).
+const FONT_HREF =
+  'https://fonts.googleapis.com/css2?' +
+  'family=Bodoni+Moda:ital@0;1' +
+  '&family=Inter:wght@300;400;600;700' +
+  '&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0' +
+  '&display=swap';
+
+// Load the stylesheet without blocking the first paint: `media="print"` keeps it
+// off the critical path, then `onload` flips it to `all`. <noscript> is the
+// no-JS fallback. This removes fonts from the render-blocking-resources audit.
+const FONT_LINKS =
+  '<link rel="preload" as="style" href="' + FONT_HREF + '"/>\n' +
+  '<link rel="stylesheet" href="' + FONT_HREF + '" media="print" onload="this.media=\'all\'"/>\n' +
+  '<noscript><link rel="stylesheet" href="' + FONT_HREF + '"/></noscript>';
+
+// Strip every existing Google Fonts <link ... rel="stylesheet"> and replace the
+// first occurrence with the optimized non-blocking loader (rest removed).
+function optimizeFonts(html) {
+  let replaced = false;
+  html = html.replace(
+    /<link\b[^>]*href="https:\/\/fonts\.googleapis\.com\/css2[^"]*"[^>]*\/?>/g,
+    () => {
+      if (replaced) return '';
+      replaced = true;
+      return FONT_LINKS;
+    }
+  );
+  return html;
+}
+
+function addHeadExtras(html, page) {
+  html = html.replace('<meta charset="utf-8"/>', HEAD_META);
+  html = optimizeFonts(html);
+  // Preload the LCP image on the Home hero so it starts downloading immediately.
+  if (page && page.src === 'Home') {
+    html = html.replace(
+      '</head>',
+      '<link rel="preload" as="image" href="assets/hero-wide.webp" fetchpriority="high"/>\n</head>'
+    );
+  }
   // Inject the logo styles at the end of <head>.
   html = html.replace('</head>', LOGO_CSS + '</head>');
+  return html;
+}
+
+// --- Mobile navigation ------------------------------------------------------
+// The source nav hides its links behind `hidden md:flex` with no working mobile
+// menu, so phones can't navigate. Inject a wired hamburger + full-screen menu.
+const HAMBURGER =
+  '<button id="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false" ' +
+  'class="md:hidden flex items-center justify-center text-on-surface hover:text-primary transition-colors p-1 ml-3">' +
+  '<span class="material-symbols-outlined">menu</span></button>';
+
+const MOBILE_MENU = `
+<!-- Menú móvil -->
+<div id="mobile-menu" class="fixed inset-0 z-[9999] md:hidden opacity-0 pointer-events-none transition-opacity duration-300 bg-background/[0.97] backdrop-blur-xl flex flex-col">
+  <div class="flex justify-between items-center px-margin-mobile pt-6 pb-2">
+    <span class="ph-logo text-[20px]"><span class="ph-logo__word">PANTHEON</span><span class="ph-logo__sub">studio</span></span>
+    <button id="nav-close" type="button" aria-label="Cerrar menú" class="text-on-surface hover:text-primary transition-colors p-1"><span class="material-symbols-outlined">close</span></button>
+  </div>
+  <nav class="flex-1 flex flex-col justify-center gap-6 px-margin-mobile" aria-label="Menú principal">
+    <a href="proyectos.html" class="font-display-md text-headline-lg leading-none text-on-surface hover:text-primary hover:pl-2 transition-all">Proyectos</a>
+    <a href="servicios.html" class="font-display-md text-headline-lg leading-none text-on-surface hover:text-primary hover:pl-2 transition-all">Servicios</a>
+    <a href="cotizacion.html" class="font-display-md text-headline-lg leading-none text-on-surface hover:text-primary hover:pl-2 transition-all">Contacto</a>
+    <a href="cotizacion.html" class="mt-8 self-start cta-glow !text-[13px]">Cotizar proyecto</a>
+    <a href="${WHATSAPP_URL}" target="_blank" rel="noopener" class="mt-2 inline-flex items-center gap-3 font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">WhatsApp <span class="material-symbols-outlined text-base">arrow_right_alt</span></a>
+  </nav>
+</div>
+`;
+
+const MOBILE_MENU_SCRIPT = `
+<script>
+(function(){
+  var b=document.getElementById('nav-burger'),m=document.getElementById('mobile-menu'),c=document.getElementById('nav-close');
+  if(!b||!m)return;
+  function set(o){m.classList.toggle('opacity-0',!o);m.classList.toggle('pointer-events-none',!o);b.setAttribute('aria-expanded',o?'true':'false');document.body.style.overflow=o?'hidden':'';}
+  b.addEventListener('click',function(){set(true);});
+  if(c)c.addEventListener('click',function(){set(false);});
+  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+})();
+</script>
+`;
+
+function addMobileNav(html) {
+  // Reuse the page's own (dead) mobile button if present; else add a hamburger
+  // as the last item in the nav bar.
+  const dead = /<button class="md:hidden text-on-background">\s*<span class="material-symbols-outlined">menu<\/span>\s*<\/button>/;
+  if (dead.test(html)) {
+    html = html.replace(dead, HAMBURGER);
+  } else {
+    html = html.replace(/<\/div>\s*<\/nav>/, HAMBURGER + '\n</div>\n</nav>');
+  }
+  html = html.replace('</body>', MOBILE_MENU + MOBILE_MENU_SCRIPT + '</body>');
   return html;
 }
 
@@ -399,6 +539,57 @@ function wireLinks(html) {
   return html;
 }
 
+// Accessibility / SEO polish applied to the final HTML of every page.
+function a11ySeoFixes(html, p) {
+  // 1. The tiny uppercase "overlines" are styled with the label-sm/xs tokens but
+  //    were marked as <h3>/<h4>, which breaks the heading outline. They are
+  //    decorative, so demote them to <p> (fixes axe: heading-order).
+  html = html.replace(
+    /<h([2-6])\b([^>]*(?:label-sm|label-xs)[^>]*)>([\s\S]*?)<\/h\1>/g,
+    '<p$2>$3</p>'
+  );
+  // 2. Proyectos jumps h1 -> h3 (no h2). Promote the featured project title so
+  //    the first heading after the h1 is an h2.
+  if (p.out === 'proyectos.html') {
+    html = html.replace(/<h3(\b[^>]*font-headline-lg[^>]*)>([\s\S]*?)<\/h3>/, '<h2$1>$2</h2>');
+  }
+  // 2b. The gallery pulls large images from an external host (googleusercontent).
+  //     Preconnect to it and preload the first (LCP) image so LCP is fast and
+  //     doesn't swing with connection-setup latency.
+  if (/lh3\.googleusercontent\.com/.test(html)) {
+    const first = html.match(/<img\b[^>]*\ssrc="(https:\/\/lh3\.googleusercontent\.com[^"]+)"/);
+    let inject = '<link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin/>';
+    if (first) inject += '\n<link rel="preload" as="image" href="' + first[1] + '" fetchpriority="high"/>';
+    html = html.replace('</head>', inject + '\n</head>');
+  }
+  // 3. Gallery images keep their description in data-alt; expose it as a real
+  //    alt attribute (fixes axe/seo: image-alt). Lazy-load all EXCEPT the first
+  //    — that one is the LCP element, so it stays eager + high priority.
+  let firstDataImg = true;
+  html = html.replace(/<img\b([^>]*?)\sdata-alt=/g, (m, pre) => {
+    if (firstDataImg) {
+      firstDataImg = false;
+      return '<img' + pre + ' fetchpriority="high" decoding="async" alt=';
+    }
+    return '<img' + pre + ' loading="lazy" decoding="async" alt=';
+  });
+  // 4. Guarantee a <title> (Proyectos had none).
+  if (!/<title>[\s\S]*?<\/title>/.test(html) && p.title) {
+    html = html.replace('</head>', '<title>' + p.title + '</title>\n</head>');
+  }
+  // 5. Inactive wizard step labels used /40 opacity (fails color-contrast). Bump
+  //    to /70 in both the markup and the JS that re-applies it on step change.
+  html = html.replace(/text-on-surface-variant\/40/g, 'text-on-surface-variant/70');
+  // 6. Faint decorative index watermarks: hide from the a11y tree (screen readers
+  //    shouldn't announce "01 02 03…") and lift the color to clear the 3:1
+  //    large-text contrast minimum while staying subtle.
+  html = html.replace(
+    /<span class="([^"]*)text-outline-variant opacity-30([^"]*)">/g,
+    '<span aria-hidden="true" class="$1text-[#6f6a5e]$2">'
+  );
+  return html;
+}
+
 function injectSections(html, keys) {
   if (!keys || !keys.length) return html;
   // Wrap in a solid backdrop; ui-hideable so it hides with the rest on Home.
@@ -409,15 +600,22 @@ function injectSections(html, keys) {
 }
 
 // --- Build ------------------------------------------------------------------
-for (const p of pages) {
-  let html = fs.readFileSync(path.join(root, p.src, 'code.html'), 'utf8');
-  if (p.src === 'Home') html = homeTransform(html);
-  html = addHeadExtras(html);
-  html = applyLogos(html);
-  html = ctaGlow(html);
-  html = injectSections(html, p.sections);
-  html = wireLinks(html);
-  fs.writeFileSync(path.join(outDir, p.out), html, 'utf8');
-  console.log(`built ${p.out}  <-  ${p.src}/code.html  [${p.sections.join(', ') || 'no extra sections'}]`);
-}
-console.log('Done. Output in /site');
+(async () => {
+  await processImages();
+  for (const p of pages) {
+    let html = fs.readFileSync(path.join(root, p.src, 'code.html'), 'utf8');
+    if (p.src === 'Home') html = homeTransform(html);
+    html = staticTailwind(html);
+    html = inlineNoise(html);
+    html = addHeadExtras(html, p);
+    html = applyLogos(html);
+    html = ctaGlow(html);
+    html = injectSections(html, p.sections);
+    html = wireLinks(html);
+    html = addMobileNav(html);
+    html = a11ySeoFixes(html, p);
+    fs.writeFileSync(path.join(outDir, p.out), html, 'utf8');
+    console.log(`built ${p.out}  <-  ${p.src}/code.html  [${p.sections.join(', ') || 'no extra sections'}]`);
+  }
+  console.log('Done. Output in /site');
+})().catch((e) => { console.error(e); process.exit(1); });
