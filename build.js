@@ -317,8 +317,8 @@ function homeTransform(html) {
     'bg-transparent backdrop-blur-xl dark:bg-background/80 border-b border-outline-variant/20',
     'bg-transparent border-b border-outline-variant/10'
   );
-  // 3b. Lower the nav elements a bit.
-  html = html.replace('px-margin-desktop py-base', 'px-margin-desktop pt-6 pb-2');
+  // 3b. Lower the nav elements a bit + use mobile padding on small screens.
+  html = html.replace('px-margin-desktop py-base', 'px-margin-mobile md:px-margin-desktop pt-6 pb-2');
   // 3c. Breathing illumination on the "Selected Clients" logos.
   html = html.replace('opacity-40 grayscale contrast-125', 'contrast-110');
   html = html.replace(/font-display-md text-headline-md tracking-tighter/g, 'font-display-md text-headline-md tracking-tighter client-logo');
@@ -463,6 +463,10 @@ const MOBILE_MENU_SCRIPT = `
 `;
 
 function addMobileNav(html) {
+  // Hide the nav's "Cotizar proyecto" CTA on mobile — it clutters the bar next
+  // to the logo and is already available inside the mobile menu. (First .cta-glow
+  // in the document is the nav one.)
+  html = html.replace('class="cta-glow"', 'class="cta-glow hidden md:inline-block"');
   // Reuse the page's own (dead) mobile button if present; else add a hamburger
   // as the last item in the nav bar.
   const dead = /<button class="md:hidden text-on-background">\s*<span class="material-symbols-outlined">menu<\/span>\s*<\/button>/;
