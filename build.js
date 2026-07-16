@@ -261,13 +261,7 @@ const HOME_CSS = `
      recorte mínimo, sin espacios ni difuminado. */
   #hero-section{height:100vh;height:100svh;}
   #hero-section .hero-main{object-fit:cover;object-position:center;}
-  /* Efecto diapositiva: cada sección se ancla al hacer scroll. */
-  html{scroll-behavior:smooth;}
-  @media (min-width:768px){
-    html{scroll-snap-type:y proximity;}
-    #hero-section{scroll-snap-align:start;scroll-snap-stop:always;}
-    #after-hero > section{scroll-snap-align:start;}
-  }
+  /* Scroll nativo normal (sin snap): baja de forma fluida y sin cortes. */
   /* Ocultar/mostrar interfaz (el hero permanece visible). */
   nav,footer,.ui-hideable,.wa-fab{transition:opacity .6s ease;}
   body.ui-hidden nav,body.ui-hidden footer,body.ui-hidden .ui-hideable,body.ui-hidden .wa-fab{opacity:0;pointer-events:none;}
