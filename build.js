@@ -331,11 +331,8 @@ function homeTransform(html) {
   // 4. Wrap the scrolling content (below the hero) so it can be hidden and snapped.
   html = html.replace('<!-- Trust Strip -->', '<div id="after-hero" class="ui-hideable relative bg-background">\n<!-- Trust Strip -->');
   html = html.replace('</main>', '</div>\n</main>');
-  // 5. Interface toggle right after <body>.
-  html = html.replace(/(<body[^>]*>)/, '$1\n' + UI_TOGGLE);
-  // 6. Home styles + toggle script.
+  // 5. Home styles (scroll-snap + client-logo animation).
   html = html.replace('</head>', HOME_CSS + '</head>');
-  html = html.replace('</body>', UI_TOGGLE_SCRIPT + '</body>');
   return html;
 }
 
