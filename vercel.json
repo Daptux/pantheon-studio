@@ -2,5 +2,5 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "node build.js",
   "outputDirectory": "site",
-  "cleanUrls": true
+  "framework": null
 }
